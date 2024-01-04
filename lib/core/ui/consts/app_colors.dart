@@ -13,4 +13,6 @@ class AppColors {
 
   static const Color emerald700 = Color(0xff047857);
   static const Color red700 = Color(0xffB91C1C);
+
+  static const Color black = Color(0xff000000);
 }
