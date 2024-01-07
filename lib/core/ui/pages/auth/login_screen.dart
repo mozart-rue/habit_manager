@@ -5,6 +5,7 @@ import 'package:habit_manager/core/ui/components/go_to_text_component.dart';
 import 'package:habit_manager/core/ui/components/input_text_form_field_component.dart';
 import 'package:habit_manager/core/ui/components/main_button_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
+import 'package:habit_manager/core/ui/pages/auth/sign_up_screen.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -81,7 +82,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GoToTextComponent(
                     title: 'Cadastrar-se',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SignUpScreen(),
+                      ));
+                    },
                   ),
                 ],
               ),
