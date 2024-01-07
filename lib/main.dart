@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/auth/login_screen.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Habit Manager',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
