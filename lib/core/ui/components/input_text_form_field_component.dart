@@ -4,8 +4,9 @@ import 'package:habit_manager/core/ui/consts/app_colors.dart';
 class InputTextFormFieldComponent extends StatelessWidget {
   final String label;
   final String? Function(String? value)? validate;
+  final TextEditingController? controller;
   const InputTextFormFieldComponent(
-      {required this.label, this.validate, super.key});
+      {required this.label, this.validate, this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class InputTextFormFieldComponent extends StatelessWidget {
       children: [
         TextFormField(
           validator: validate,
+          controller: controller,
           style: const TextStyle(
             color: AppColors.slate200,
             fontSize: 16,
