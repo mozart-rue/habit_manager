@@ -37,6 +37,7 @@ dependencies:
   gap: ^3.0.1
   flutter_phosphor_icons: ^0.0.1+6
   email_validator: ^2.1.17
+  validatorless: ^1.2.3
 
 dev_dependencies:
   flutter_test:
