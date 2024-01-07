@@ -19,6 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool rememberMe = false;
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   void setRememberMe(bool? value) {
     setState(() {
       rememberMe = value ?? false;
@@ -99,11 +102,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       InputTextFormFieldComponent(
                         label: 'Email',
+                        controller: emailController,
                         validate: validateEmail,
                       ),
                       const Gap(32),
                       InputTextFormFieldComponent(
                         label: 'Senha',
+                        controller: passwordController,
                         validate: validatePassword,
                       ),
                       Gap(size.height * 0.02),
