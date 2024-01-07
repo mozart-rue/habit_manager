@@ -14,7 +14,7 @@ class AppBackgroundScreen extends StatelessWidget {
           Container(
             height: size.height,
             width: size.width,
-            color: AppColors.slate700,
+            color: AppColors.slate900,
           ),
           child,
         ],
