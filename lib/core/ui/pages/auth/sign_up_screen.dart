@@ -13,6 +13,11 @@ class SignUpScreen extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   void validateForm() {
     if (_formKey.currentState!.validate()) {
       // valid to create account
@@ -58,6 +63,7 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       InputTextFormFieldComponent(
                         label: 'Nome',
+                        controller: nameController,
                         validate: Validatorless.multiple([
                           Validatorless.required('O campo é obrigatório.'),
                         ]),
@@ -65,6 +71,7 @@ class SignUpScreen extends StatelessWidget {
                       const Gap(32),
                       InputTextFormFieldComponent(
                         label: 'Email',
+                        controller: emailController,
                         validate: Validatorless.multiple([
                           Validatorless.required('O campo é obrigatório.'),
                           Validatorless.email('Insira um email válido.')
@@ -73,6 +80,7 @@ class SignUpScreen extends StatelessWidget {
                       const Gap(32),
                       InputTextFormFieldComponent(
                         label: 'Senha',
+                        controller: passwordController,
                         validate: Validatorless.multiple([
                           Validatorless.required('O campo é obrigatório'),
                           Validatorless.min(
@@ -82,6 +90,7 @@ class SignUpScreen extends StatelessWidget {
                       const Gap(32),
                       InputTextFormFieldComponent(
                         label: 'Confirma a senha',
+                        controller: confirmPasswordController,
                         validate: Validatorless.multiple([
                           Validatorless.required('O campo é obrigatório'),
                           Validatorless.min(
