@@ -7,6 +7,7 @@ import 'package:habit_manager/core/ui/components/main_button_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/auth/sign_up_screen.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
+import 'package:habit_manager/core/ui/pages/home/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -52,14 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     return null;
-  }
-
-  void validateForm() {
-    bool isFormValid = _formKey.currentState!.validate();
-
-    if (isFormValid) {
-      // navigate to home page
-    }
   }
 
   @override
@@ -145,7 +138,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       Gap(size.height * 0.1),
                       MainButtonComponent(
                         title: 'Entrar',
-                        onPress: validateForm,
+                        onPress: () {
+                          bool isFormValid = _formKey.currentState!.validate();
+
+                          if (isFormValid) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const HomeScreen()));
+                          }
+                        },
                       ),
                     ],
                   ),
