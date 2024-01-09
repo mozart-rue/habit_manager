@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:habit_manager/core/ui/components/display_current_date_component.dart';
 import 'package:habit_manager/core/ui/components/habit_circular_progress_component.dart';
+import 'package:habit_manager/core/ui/components/header_display_top_itens_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
 
@@ -89,6 +90,12 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              const Gap(30),
+              HeaderDisplayTopItensComponent(
+                title: 'Habitos do dia',
+                onTapSeeAll: () {},
+                children: const [],
               ),
             ],
           ),
