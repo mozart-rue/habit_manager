@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:habit_manager/core/ui/components/display_current_date_component.dart';
+import 'package:habit_manager/core/ui/components/habit_circular_progress_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
 
@@ -10,6 +11,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String userName = 'User';
+    int totalDailyHabits = 6;
+    int dailyHabitsDone = 2;
     Size size = MediaQuery.of(context).size;
     return AppBackgroundScreen(
       child: SafeArea(
@@ -46,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: AppColors.blue,
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [
                       AppColors.blue,
                       AppColors.lightBlue,
@@ -55,6 +58,35 @@ class HomeScreen extends StatelessWidget {
                     stops: [0.20, 0.45, 0.75],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const HabitCircularProgressComponent(),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '$dailyHabitsDone de $totalDailyHabits Habitos',
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.slate100,
+                            ),
+                          ),
+                          const Text(
+                            'concluídos hoje',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.slate100,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
