@@ -12,6 +12,8 @@ class AppColors {
   static const Color slate100 = Color(0xffF5F5F4);
 
   static const Color blue = Color(0xff1A8AE5);
+  static const Color lightBlue = Color(0xff1AA0E5);
+  static const Color lightestBlue = Color(0xff1AC5E5);
   static const Color red700 = Color(0xffB91C1C);
 
   static const Color black = Color(0xff000000);
