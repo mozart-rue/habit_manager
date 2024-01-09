@@ -6,8 +6,15 @@ import 'package:habit_manager/core/ui/consts/app_colors.dart';
 class GoToTextComponent extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
-  const GoToTextComponent(
-      {required this.title, required this.onTap, super.key});
+  final bool enableIcon;
+  final double fontSize;
+  const GoToTextComponent({
+    required this.title,
+    required this.onTap,
+    this.fontSize = 16,
+    this.enableIcon = true,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +31,13 @@ class GoToTextComponent extends StatelessWidget {
             ),
           ),
           const Gap(4),
-          const Icon(
-            PhosphorIcons.caret_right,
-            color: AppColors.blue,
-            size: 16,
-          ),
+          enableIcon
+              ? const Icon(
+                  PhosphorIcons.caret_right,
+                  color: AppColors.blue,
+                  size: 16,
+                )
+              : Container(),
         ],
       ),
     );
