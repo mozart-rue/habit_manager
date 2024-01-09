@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String userName = 'User';
+    Size size = MediaQuery.of(context).size;
     return AppBackgroundScreen(
       child: SafeArea(
         child: Padding(
@@ -37,6 +38,25 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const Gap(20),
+              Container(
+                width: size.width * 0.9,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.blue,
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.blue,
+                      AppColors.lightBlue,
+                      AppColors.lightestBlue,
+                    ],
+                    stops: [0.20, 0.45, 0.75],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
               ),
             ],
           ),
