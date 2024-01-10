@@ -102,26 +102,34 @@ class HomeScreen extends StatelessWidget {
                   HeaderDisplayTopItensComponent(
                     title: 'Habitos do dia',
                     onTapSeeAll: () {},
-                    children: const [
-                      Gap(12),
-                      HabitTileComponent(done: true),
-                      Gap(8),
-                      HabitTileComponent(done: true),
-                      Gap(8),
-                      HabitTileComponent(),
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return const Padding(
+                              padding: EdgeInsets.only(top: 8),
+                              child: HabitTileComponent(done: true),
+                            );
+                          }),
                     ],
                   ),
                   const Gap(24),
                   HeaderDisplayTopItensComponent(
                     title: 'Seus Objetivos',
                     onTapSeeAll: () {},
-                    children: const [
-                      Gap(12),
-                      GoalTileComponent(),
-                      Gap(12),
-                      GoalTileComponent(),
-                      Gap(12),
-                      GoalTileComponent(),
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return const Padding(
+                              padding: EdgeInsets.only(top: 8),
+                              child: GoalTileComponent(),
+                            );
+                          }),
                     ],
                   ),
                 ],
