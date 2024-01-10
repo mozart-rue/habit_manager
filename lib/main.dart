@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
+import 'package:habit_manager/core/ui/pages/account/account_screen.dart';
 import 'package:habit_manager/core/ui/pages/auth/login_screen.dart';
+import 'package:habit_manager/core/ui/pages/auth/sign_up_screen.dart';
+import 'package:habit_manager/core/ui/pages/home/home_screen.dart';
+import 'package:habit_manager/core/ui/pages/progress/progress_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +22,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => SignUpScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/account': (context) => const AccountScreen(),
+        '/progress': (context) => const ProgressScreen(),
+      },
       home: const LoginScreen(),
     );
   }
