@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:habit_manager/core/ui/components/display_current_date_component.dart';
 import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
@@ -122,6 +123,28 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: InkWell(
+        onTap: () {},
+        child: Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            color: AppColors.blue,
+            border: Border.all(color: AppColors.slate900, width: 4),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Center(
+              child: Icon(
+                PhosphorIcons.plus,
+                color: AppColors.slate100,
+                size: 36,
               ),
             ),
           ),
