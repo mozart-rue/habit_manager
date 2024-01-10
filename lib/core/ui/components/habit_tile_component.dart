@@ -34,11 +34,23 @@ class HabitTileComponent extends StatelessWidget {
             ),
             Row(
               children: [
-                Checkbox(
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  activeColor: doneStrong,
-                  value: done,
-                  onChanged: (value) {},
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 26,
+                    height: 26,
+                    decoration: BoxDecoration(
+                      color: done ? doneStrong : AppColors.white,
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: AppColors.black),
+                    ),
+                    child: done
+                        ? const Icon(
+                            PhosphorIcons.check_bold,
+                            color: AppColors.slate100,
+                          )
+                        : Container(),
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
