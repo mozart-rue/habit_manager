@@ -8,17 +8,15 @@ class AppBackgroundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: size.height,
-            width: size.width,
-            color: AppColors.slate900,
-          ),
-          child,
-        ],
-      ),
+    return Stack(
+      children: [
+        Container(
+          height: size.height,
+          width: size.width,
+          color: AppColors.slate900,
+        ),
+        child,
+      ],
     );
   }
 }
