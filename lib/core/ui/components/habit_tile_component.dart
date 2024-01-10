@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:gap/gap.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 
 class HabitTileComponent extends StatelessWidget {
