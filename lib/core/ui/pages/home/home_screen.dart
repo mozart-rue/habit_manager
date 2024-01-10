@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
+import 'package:habit_manager/core/ui/components/bottom_navigation_bar_icon.dart';
 import 'package:habit_manager/core/ui/components/display_current_date_component.dart';
 import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
 import 'package:habit_manager/core/ui/components/habit_circular_progress_component.dart';
@@ -19,10 +20,11 @@ class HomeScreen extends StatelessWidget {
     int dailyHabitsDone = 2;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: const BottomNavigationBarIcon(currentIndex: 1),
       body: AppBackgroundScreen(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: SingleChildScrollView(
               child: Column(
                 children: [
