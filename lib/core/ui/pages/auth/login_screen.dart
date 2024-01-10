@@ -58,100 +58,103 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return AppBackgroundScreen(
-      child: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              Gap(size.height * 0.1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Text(
-                    'Entrar',
-                    style: TextStyle(
-                      color: AppColors.slate100,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
+    return Scaffold(
+      body: AppBackgroundScreen(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              children: [
+                Gap(size.height * 0.1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Text(
+                      'Entrar',
+                      style: TextStyle(
+                        color: AppColors.slate100,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    GoToTextComponent(
+                      title: 'Cadastrar-se',
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SignUpScreen(),
+                        ));
+                      },
+                    ),
+                  ],
+                ),
+                Gap(size.height * 0.16),
+                Form(
+                  key: _formKey,
+                  child: SizedBox(
+                    width: size.width * 0.8,
+                    child: Column(
+                      children: [
+                        InputTextFormFieldComponent(
+                          label: 'Email',
+                          controller: emailController,
+                          validate: validateEmail,
+                        ),
+                        const Gap(32),
+                        InputTextFormFieldComponent(
+                          label: 'Senha',
+                          controller: passwordController,
+                          validate: validatePassword,
+                        ),
+                        Gap(size.height * 0.02),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  value: rememberMe,
+                                  onChanged: setRememberMe,
+                                ),
+                                const Text(
+                                  'Lembre me',
+                                  style: TextStyle(
+                                    color: AppColors.slate100,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Text(
+                              'Esqueceu a senha?',
+                              style: TextStyle(
+                                color: AppColors.blue,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Gap(size.height * 0.1),
+                        MainButtonComponent(
+                          title: 'Entrar',
+                          onPress: () {
+                            bool isFormValid =
+                                _formKey.currentState!.validate();
+
+                            if (isFormValid) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const HomeScreen()));
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                  GoToTextComponent(
-                    title: 'Cadastrar-se',
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SignUpScreen(),
-                      ));
-                    },
-                  ),
-                ],
-              ),
-              Gap(size.height * 0.16),
-              Form(
-                key: _formKey,
-                child: SizedBox(
-                  width: size.width * 0.8,
-                  child: Column(
-                    children: [
-                      InputTextFormFieldComponent(
-                        label: 'Email',
-                        controller: emailController,
-                        validate: validateEmail,
-                      ),
-                      const Gap(32),
-                      InputTextFormFieldComponent(
-                        label: 'Senha',
-                        controller: passwordController,
-                        validate: validatePassword,
-                      ),
-                      Gap(size.height * 0.02),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Checkbox(
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                value: rememberMe,
-                                onChanged: setRememberMe,
-                              ),
-                              const Text(
-                                'Lembre me',
-                                style: TextStyle(
-                                  color: AppColors.slate100,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Text(
-                            'Esqueceu a senha?',
-                            style: TextStyle(
-                              color: AppColors.blue,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Gap(size.height * 0.1),
-                      MainButtonComponent(
-                        title: 'Entrar',
-                        onPress: () {
-                          bool isFormValid = _formKey.currentState!.validate();
-
-                          if (isFormValid) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
-                          }
-                        },
-                      ),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
