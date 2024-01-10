@@ -13,10 +13,11 @@ class SignUpScreen extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   void validateForm() {
     if (_formKey.currentState!.validate()) {
@@ -27,86 +28,88 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return AppBackgroundScreen(
-      child: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              Gap(size.height * 0.1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Text(
-                    'Cadastrar',
-                    style: TextStyle(
-                      color: AppColors.slate100,
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
+    return Scaffold(
+      body: AppBackgroundScreen(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              children: [
+                Gap(size.height * 0.1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const Text(
+                      'Cadastrar',
+                      style: TextStyle(
+                        color: AppColors.slate100,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    GoToTextComponent(
+                      title: 'Entrar',
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const LoginScreen()));
+                      },
+                    ),
+                  ],
+                ),
+                Gap(size.height * 0.08),
+                Form(
+                  key: _formKey,
+                  child: SizedBox(
+                    width: size.width * 0.8,
+                    child: Column(
+                      children: [
+                        InputTextFormFieldComponent(
+                          label: 'Nome',
+                          controller: nameController,
+                          validate: Validatorless.multiple([
+                            Validatorless.required('O campo é obrigatório.'),
+                          ]),
+                        ),
+                        const Gap(32),
+                        InputTextFormFieldComponent(
+                          label: 'Email',
+                          controller: emailController,
+                          validate: Validatorless.multiple([
+                            Validatorless.required('O campo é obrigatório.'),
+                            Validatorless.email('Insira um email válido.')
+                          ]),
+                        ),
+                        const Gap(32),
+                        InputTextFormFieldComponent(
+                          label: 'Senha',
+                          controller: passwordController,
+                          validate: Validatorless.multiple([
+                            Validatorless.required('O campo é obrigatório'),
+                            Validatorless.min(8,
+                                'A senha deve possuir 8 caracteres no mínimo.')
+                          ]),
+                        ),
+                        const Gap(32),
+                        InputTextFormFieldComponent(
+                          label: 'Confirma a senha',
+                          controller: confirmPasswordController,
+                          validate: Validatorless.multiple([
+                            Validatorless.required('O campo é obrigatório'),
+                            Validatorless.min(8,
+                                'A senha deve possuir 8 caracteres no mínimo.')
+                          ]),
+                        ),
+                        Gap(size.height * 0.1),
+                        MainButtonComponent(
+                          title: 'Cadastrar',
+                          onPress: validateForm,
+                        ),
+                      ],
                     ),
                   ),
-                  GoToTextComponent(
-                    title: 'Entrar',
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const LoginScreen()));
-                    },
-                  ),
-                ],
-              ),
-              Gap(size.height * 0.08),
-              Form(
-                key: _formKey,
-                child: SizedBox(
-                  width: size.width * 0.8,
-                  child: Column(
-                    children: [
-                      InputTextFormFieldComponent(
-                        label: 'Nome',
-                        controller: nameController,
-                        validate: Validatorless.multiple([
-                          Validatorless.required('O campo é obrigatório.'),
-                        ]),
-                      ),
-                      const Gap(32),
-                      InputTextFormFieldComponent(
-                        label: 'Email',
-                        controller: emailController,
-                        validate: Validatorless.multiple([
-                          Validatorless.required('O campo é obrigatório.'),
-                          Validatorless.email('Insira um email válido.')
-                        ]),
-                      ),
-                      const Gap(32),
-                      InputTextFormFieldComponent(
-                        label: 'Senha',
-                        controller: passwordController,
-                        validate: Validatorless.multiple([
-                          Validatorless.required('O campo é obrigatório'),
-                          Validatorless.min(
-                              8, 'A senha deve possuir 8 caracteres no mínimo.')
-                        ]),
-                      ),
-                      const Gap(32),
-                      InputTextFormFieldComponent(
-                        label: 'Confirma a senha',
-                        controller: confirmPasswordController,
-                        validate: Validatorless.multiple([
-                          Validatorless.required('O campo é obrigatório'),
-                          Validatorless.min(
-                              8, 'A senha deve possuir 8 caracteres no mínimo.')
-                        ]),
-                      ),
-                      Gap(size.height * 0.1),
-                      MainButtonComponent(
-                        title: 'Cadastrar',
-                        onPress: validateForm,
-                      ),
-                    ],
-                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
