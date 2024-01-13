@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -19,6 +21,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool rememberMe = false;
+  bool isWaitingForAuthenticate = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -27,6 +30,10 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       rememberMe = value ?? false;
     });
+  }
+
+  void setWaitingForAuthenticate(bool value) {
+    setState(() => isWaitingForAuthenticate = value);
   }
 
   String? validateEmail(String? value) {
@@ -53,6 +60,17 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     return null;
+  }
+
+  Future<bool> handleAuthentication() async {
+    if (emailController.text == 'meu@mail.com' &&
+        passwordController.text == 'minhasenha123') {
+      await Future.delayed(const Duration(seconds: 3));
+      return true;
+    }
+
+    await Future.delayed(const Duration(seconds: 3));
+    return false;
   }
 
   @override
@@ -138,14 +156,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Gap(size.height * 0.1),
                         MainButtonComponent(
-                          title: 'Entrar',
+                          title: isWaitingForAuthenticate ? 'load' : 'Entrar',
+                          isLoading: isWaitingForAuthenticate,
                           onPress: () {
                             bool isFormValid =
                                 _formKey.currentState!.validate();
 
                             if (isFormValid) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
+                              handleAuthentication().then((value) {
+                                if (value) {
+                                  setWaitingForAuthenticate(false);
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const HomeScreen()));
+                                }
+                              });
                             }
                           },
                         ),
