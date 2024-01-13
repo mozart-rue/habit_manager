@@ -6,11 +6,13 @@ class MainButtonComponent extends StatelessWidget {
   final VoidCallback onPress;
   final Color btnColor;
   final Color textColor;
+  final bool isLoading;
   const MainButtonComponent(
       {required this.title,
       required this.onPress,
       this.btnColor = AppColors.blue,
       this.textColor = AppColors.slate200,
+      this.isLoading = false,
       super.key});
 
   @override
@@ -28,14 +30,23 @@ class MainButtonComponent extends StatelessWidget {
           color: btnColor,
         ),
         child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              color: textColor,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          child: isLoading
+              ? SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    color: textColor,
+                    strokeWidth: 4,
+                  ),
+                )
+              : Text(
+                  title,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
         ),
       ),
     );
