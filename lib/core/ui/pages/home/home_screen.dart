@@ -139,7 +139,9 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed('/createHabit');
+        },
         child: Container(
           width: 60,
           height: 60,
