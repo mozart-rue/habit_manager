@@ -47,7 +47,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
                     width: size.width * 0.9,
                     child: InputTextFormFieldComponent(
                       label: 'Nome Do Habito',
-                      controller: yourGoalController,
+                      controller: habitNameController,
                     ),
                   ),
                   const Gap(60),
