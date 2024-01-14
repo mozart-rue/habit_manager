@@ -4,7 +4,6 @@ import 'package:habit_manager/core/ui/components/account_options_container.dart'
 import 'package:habit_manager/core/ui/components/bottom_navigation_bar_icon.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
-import 'package:habit_manager/core/ui/pages/my_account/my_account_screen.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
