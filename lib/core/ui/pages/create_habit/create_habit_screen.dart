@@ -5,6 +5,7 @@ import 'package:habit_manager/core/ui/components/input_text_form_field_component
 import 'package:habit_manager/core/ui/components/main_button_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
+import 'package:habit_manager/core/ui/pages/frequency_picker/frequency_picker_screen.dart';
 
 class CreateHabitScreen extends StatefulWidget {
   const CreateHabitScreen({super.key});
@@ -19,6 +20,8 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
 
   DateTime startDateSelected = DateTime.now();
   DateTime finalDateSelected = DateTime.now();
+
+  String frequencySelected = 'Diariamente';
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,19 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
                         ),
                         const Gap(2),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FrequencyPickerScreen()))
+                                .then((value) {
+                              if (value != null) {
+                                setState(() {
+                                  frequencySelected = value;
+                                });
+                              }
+                            });
+                          },
                           child: Container(
                             width: size.width * 0.9,
                             height: 46,
@@ -80,7 +95,7 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
                               border: Border.all(
                                   color: AppColors.slate300, width: 1),
                               borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                     color: AppColors.slate300,
                                     offset: Offset(1, 2))
@@ -88,8 +103,8 @@ class _CreateHabitScreenState extends State<CreateHabitScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                'Diariamente',
-                                style: TextStyle(
+                                frequencySelected,
+                                style: const TextStyle(
                                   color: AppColors.slate200,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
