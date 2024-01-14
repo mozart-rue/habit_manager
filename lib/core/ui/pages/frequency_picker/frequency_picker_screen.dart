@@ -52,37 +52,39 @@ class FrequencyPickerScreen extends StatelessWidget {
                 const Gap(40),
                 SizedBox(
                   width: size.width * 0.9,
-                  child: ListView.builder(
-                      primary: true,
-                      shrinkWrap: true,
-                      itemCount: frequencies.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pop(frequencies[index]);
-                            },
-                            child: Container(
-                              height: 46,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  border:
-                                      Border.all(color: AppColors.slate700)),
-                              child: Center(
-                                child: Text(
-                                  frequencies[index],
-                                  style: const TextStyle(
-                                    color: AppColors.slate200,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
+                  child: Expanded(
+                    child: ListView.builder(
+                        primary: true,
+                        shrinkWrap: true,
+                        itemCount: frequencies.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop(frequencies[index]);
+                              },
+                              child: Container(
+                                height: 46,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border:
+                                        Border.all(color: AppColors.slate700)),
+                                child: Center(
+                                  child: Text(
+                                    frequencies[index],
+                                    style: const TextStyle(
+                                      color: AppColors.slate200,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                  ),
                 ),
               ],
             ),
