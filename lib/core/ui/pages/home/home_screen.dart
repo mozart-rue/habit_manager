@@ -120,7 +120,9 @@ class HomeScreen extends StatelessWidget {
                   const Gap(24),
                   HeaderDisplayTopItensComponent(
                     title: 'Seus Objetivos',
-                    onTapSeeAll: () {},
+                    onTapSeeAll: () {
+                      Navigator.of(context).pushNamed('/your-goals');
+                    },
                     children: [
                       ListView.builder(
                           shrinkWrap: true,
