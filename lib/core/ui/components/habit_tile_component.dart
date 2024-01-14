@@ -4,7 +4,10 @@ import 'package:habit_manager/core/ui/consts/app_colors.dart';
 
 class HabitTileComponent extends StatelessWidget {
   final bool done;
-  const HabitTileComponent({this.done = false, super.key});
+  final VoidCallback? onCheck;
+  final Function(int value)? onSelectMenuOption;
+  const HabitTileComponent(
+      {this.done = false, this.onCheck, this.onSelectMenuOption, super.key});
 
   static const Color doneLight = AppColors.greenLight;
   static const Color doneStrong = AppColors.greenDark;
@@ -34,7 +37,7 @@ class HabitTileComponent extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: onCheck,
                   child: Container(
                     width: 26,
                     height: 26,
@@ -65,7 +68,7 @@ class HabitTileComponent extends StatelessWidget {
                       ),
                     ];
                   },
-                  onSelected: (value) {},
+                  onSelected: onSelectMenuOption,
                 ),
               ],
             ),
