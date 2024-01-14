@@ -101,7 +101,9 @@ class HomeScreen extends StatelessWidget {
                   const Gap(30),
                   HeaderDisplayTopItensComponent(
                     title: 'Habitos do dia',
-                    onTapSeeAll: () {},
+                    onTapSeeAll: () {
+                      Navigator.of(context).pushNamed('/your-habits');
+                    },
                     children: [
                       ListView.builder(
                           shrinkWrap: true,
