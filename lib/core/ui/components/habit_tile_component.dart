@@ -51,9 +51,21 @@ class HabitTileComponent extends StatelessWidget {
                         : Container(),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(PhosphorIcons.dots_three_vertical),
+                PopupMenuButton(
+                  icon: const Icon(PhosphorIcons.dots_three_vertical),
+                  itemBuilder: (context) {
+                    return const [
+                      PopupMenuItem<int>(
+                        value: 0,
+                        child: Text('Editar'),
+                      ),
+                      PopupMenuItem<int>(
+                        value: 1,
+                        child: Text('Deletar'),
+                      ),
+                    ];
+                  },
+                  onSelected: (value) {},
                 ),
               ],
             ),
