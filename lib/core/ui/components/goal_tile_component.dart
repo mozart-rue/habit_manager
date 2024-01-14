@@ -4,7 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 
 class GoalTileComponent extends StatelessWidget {
-  const GoalTileComponent({super.key});
+  final Function(int value)? onSelectMenuOption;
+  const GoalTileComponent({this.onSelectMenuOption, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,7 @@ class GoalTileComponent extends StatelessWidget {
                   ),
                 ];
               },
-              onSelected: (value) {},
+              onSelected: onSelectMenuOption,
             ),
           ],
         ),
