@@ -4,6 +4,7 @@ import 'package:habit_manager/core/ui/pages/account/account_screen.dart';
 import 'package:habit_manager/core/ui/pages/auth/login_screen.dart';
 import 'package:habit_manager/core/ui/pages/auth/sign_up_screen.dart';
 import 'package:habit_manager/core/ui/pages/create_habit/create_habit_screen.dart';
+import 'package:habit_manager/core/ui/pages/habits_progress/habits_progress_screen.dart';
 import 'package:habit_manager/core/ui/pages/home/home_screen.dart';
 import 'package:habit_manager/core/ui/pages/my_account/my_account_screen.dart';
 import 'package:habit_manager/core/ui/pages/progress/progress_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         '/your-habits': (context) => const YourHabitsScreen(),
         '/your-goals': (context) => const YourGoalsScreen(),
         '/my-account': (context) => const MyAccountScreen(),
+        '/habits-progress': (context) => const HabitsProgressScreen(),
       },
       home: const LoginScreen(),
     );
