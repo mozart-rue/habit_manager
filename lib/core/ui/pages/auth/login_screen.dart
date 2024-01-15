@@ -65,11 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<bool> handleAuthentication() async {
     if (emailController.text == 'meu@mail.com' &&
         passwordController.text == 'minhasenha123') {
-      await Future.delayed(const Duration(seconds: 3));
       return true;
     }
 
-    await Future.delayed(const Duration(seconds: 3));
     return false;
   }
 
