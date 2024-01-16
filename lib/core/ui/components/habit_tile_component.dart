@@ -28,7 +28,7 @@ class HabitTileComponent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'concluídos hoje',
+              'Ler O nome do vento',
               style: TextStyle(
                 fontSize: 18,
                 color: done ? doneStrong : todoStrong,
