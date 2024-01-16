@@ -38,7 +38,7 @@ class GoalProgressTileComponent extends StatelessWidget {
           Column(
             children: [
               Text(
-                'Estudy german every day',
+                'Ler A Cronica do Matador do Rei',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
