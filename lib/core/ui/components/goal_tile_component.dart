@@ -26,7 +26,7 @@ class GoalTileComponent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const Text(
-                  'Estudy german every day',
+                  'Ler A Cronica do Matador do Rei',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
