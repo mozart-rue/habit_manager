@@ -39,6 +39,7 @@ dependencies:
   email_validator: ^2.1.17
   validatorless: ^1.2.3
   bottom_bar: ^2.0.3
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:
