@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:habit_manager/core/env/environment.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/account/account_screen.dart';
 import 'package:habit_manager/core/ui/pages/auth/login_screen.dart';
@@ -13,6 +15,8 @@ import 'package:habit_manager/core/ui/pages/your_habits/your_habits_screen.dart'
 
 
 void main() async {
+  await dotenv.load(fileName: ".env");
+  var _ = Environment();
   runApp(const MyApp());
 }
 
