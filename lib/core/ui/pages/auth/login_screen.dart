@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:habit_manager/core/data/services/user_authenticate_service.dart';
+import 'package:habit_manager/core/exceptions/invalid_credential_exception.dart';
 import 'package:habit_manager/core/ui/components/go_to_text_component.dart';
 import 'package:habit_manager/core/ui/components/input_text_form_field_component.dart';
 import 'package:habit_manager/core/ui/components/main_button_component.dart';
@@ -63,11 +65,21 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<bool> handleAuthentication() async {
-    if (emailController.text == 'meu@mail.com' &&
-        passwordController.text == 'minhasenha123') {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    try {
+      await userAuthenticateService(email: email, password: password);
       return true;
+    } catch (e) {
+      if (e is InvalidCredentialException){
+        // do something
+        print('Credenciais invalidas fornecidas');
+        return false;
+      }
     }
 
+    print('Houve um erro ao realizar o login');
     return false;
   }
 
@@ -161,6 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _formKey.currentState!.validate();
 
                             if (isFormValid) {
+                              setWaitingForAuthenticate(true);
                               handleAuthentication().then((value) {
                                 if (value) {
                                   setWaitingForAuthenticate(false);
@@ -168,6 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       builder: (context) =>
                                           const HomeScreen()));
                                 }
+                                setWaitingForAuthenticate(false);
                               });
                             }
                           },
