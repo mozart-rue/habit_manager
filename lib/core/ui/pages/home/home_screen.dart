@@ -10,8 +10,20 @@ import 'package:habit_manager/core/ui/components/header_display_top_itens_compon
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    // handle load data
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
