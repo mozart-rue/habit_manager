@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
+import 'package:habit_manager/core/data/models/habit_model.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 
 class GoalTileComponent extends StatelessWidget {
+  final HabitModel habit;
   final Function(int value)? onSelectMenuOption;
-  const GoalTileComponent({this.onSelectMenuOption, super.key});
+  const GoalTileComponent({required this.habit, this.onSelectMenuOption, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,9 @@ class GoalTileComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  'Ler A Cronica do Matador do Rei',
-                  style: TextStyle(
+                Text(
+                  habit.goalName,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: AppColors.slate100,
@@ -53,9 +55,9 @@ class GoalTileComponent extends StatelessWidget {
                   ),
                 ),
                 const Gap(2),
-                const Text(
-                  'frequency',
-                  style: TextStyle(
+                Text(
+                  habit.frequency,
+                  style: const TextStyle(
                     fontSize: 14,
                     color: AppColors.blue,
                   ),
