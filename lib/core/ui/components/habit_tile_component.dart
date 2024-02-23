@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:habit_manager/core/data/models/habit_model.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 
 class HabitTileComponent extends StatelessWidget {
-  final bool done;
+  final HabitModel habit;
   final VoidCallback? onCheck;
   final Function(int value)? onSelectMenuOption;
   const HabitTileComponent(
-      {this.done = false, this.onCheck, this.onSelectMenuOption, super.key});
+      {required this.habit, this.onCheck, this.onSelectMenuOption, super.key,});
 
   static const Color doneLight = AppColors.greenLight;
   static const Color doneStrong = AppColors.greenDark;
@@ -20,7 +21,7 @@ class HabitTileComponent extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: done ? doneLight : todoLight,
+        color: habit.done ? doneLight : todoLight,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
@@ -28,10 +29,10 @@ class HabitTileComponent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Ler O nome do vento',
+              habit.habitName,
               style: TextStyle(
                 fontSize: 18,
-                color: done ? doneStrong : todoStrong,
+                color: habit.done ? doneStrong : todoStrong,
               ),
             ),
             Row(
@@ -42,11 +43,11 @@ class HabitTileComponent extends StatelessWidget {
                     width: 26,
                     height: 26,
                     decoration: BoxDecoration(
-                      color: done ? doneStrong : AppColors.white,
+                      color: habit.done ? doneStrong : AppColors.white,
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(color: AppColors.black),
                     ),
-                    child: done
+                    child: habit.done
                         ? const Icon(
                             PhosphorIcons.check_bold,
                             color: AppColors.slate100,
