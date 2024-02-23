@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
+import 'package:habit_manager/core/data/models/habit_model.dart';
+import 'package:habit_manager/core/data/services/fetch_habits_service.dart';
 import 'package:habit_manager/core/ui/components/bottom_navigation_bar_icon.dart';
 import 'package:habit_manager/core/ui/components/display_current_date_component.dart';
 import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
@@ -19,9 +21,27 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  bool isLoading = true;
+  late List<HabitModel> habits;
+  bool requestHasError = false;
+
+  Future<void> handleFetchHabits() async {
+    var response = await fetchHabitsService();
+
+    if (!response.succeeded) {
+      requestHasError = true;
+      setState(() {});
+      return;
+    }
+
+    habits = response.data!;
+    isLoading = false;
+    setState(() {});
+  }
+
   @override
   void initState() {
-    // handle load data
+    Future(handleFetchHabits);
     super.initState();
   }
 
@@ -120,11 +140,34 @@ class _HomeScreenState extends State<HomeScreen> {
                       ListView.builder(
                           shrinkWrap: true,
                           primary: false,
-                          itemCount: 3,
+                          itemCount: habits.length,
                           itemBuilder: (context, index) {
-                            return const Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: HabitTileComponent(done: true),
+                            if (isLoading) {
+                              return const Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            }
+
+                            if (habits.isEmpty) {
+                              return const Center(
+                                child: Text(
+                                  'Pelo visto você ainda não possui nada cadastrado.',
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              );
+                            }
+
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: HabitTileComponent(habit: habits[index],),
                             );
                           }),
                     ],
@@ -141,9 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           primary: false,
                           itemCount: 3,
                           itemBuilder: (context, index) {
-                            return const Padding(
-                              padding: EdgeInsets.only(top: 8),
-                              child: GoalTileComponent(),
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: GoalTileComponent(habit: habits[index],),
                             );
                           }),
                     ],
