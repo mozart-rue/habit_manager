@@ -5,9 +5,14 @@ import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
 
-class YourGoalsScreen extends StatelessWidget {
+class YourGoalsScreen extends StatefulWidget {
   const YourGoalsScreen({super.key});
 
+  @override
+  State<YourGoalsScreen> createState() => _YourGoalsScreenState();
+}
+
+class _YourGoalsScreenState extends State<YourGoalsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
