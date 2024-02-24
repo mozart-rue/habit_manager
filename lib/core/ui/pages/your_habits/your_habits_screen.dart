@@ -5,9 +5,14 @@ import 'package:habit_manager/core/ui/components/habit_tile_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
 
-class YourHabitsScreen extends StatelessWidget {
+class YourHabitsScreen extends StatefulWidget {
   const YourHabitsScreen({super.key});
 
+  @override
+  State<YourHabitsScreen> createState() => _YourHabitsScreenState();
+}
+
+class _YourHabitsScreenState extends State<YourHabitsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
