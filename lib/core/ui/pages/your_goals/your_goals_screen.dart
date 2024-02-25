@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
+import 'package:habit_manager/core/data/models/habit_model.dart';
+import 'package:habit_manager/core/data/services/fetch_habits_service.dart';
 import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
@@ -13,6 +15,31 @@ class YourGoalsScreen extends StatefulWidget {
 }
 
 class _YourGoalsScreenState extends State<YourGoalsScreen> {
+  bool isLoading = true;
+  bool requestHasError = false;
+  List<HabitModel> habits = [];
+
+  Future<void> handleFetchHabits() async {
+    var response = await fetchHabitsService();
+
+    if (!response.succeeded) {
+      requestHasError = true;
+      setState(() {});
+      return;
+    }
+
+    habits = response.data!;
+    isLoading = false;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // Future(handleFetchHabits);
+    Future( () async => await handleFetchHabits());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -49,14 +76,26 @@ class _YourGoalsScreenState extends State<YourGoalsScreen> {
                     ],
                   ),
                   const Gap(30),
-                  Expanded(
+                  isLoading ? 
+                  const Center(
+                    child: Text('Carregando habitos.'),
+                  )
+                  : requestHasError
+                  ? const Center(
+                    child: Text('Houve erro para carregar os dados'),
+                  )
+                  : habits.isEmpty 
+                  ? const Center(
+                    child: Text('Você ainda não possui nenhum habito cadastrado'),
+                  )
+                  : Expanded(
                     child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: 10,
+                        itemCount: habits.length,
                         itemBuilder: (context, index) {
-                          return const Padding(
-                            padding: EdgeInsets.only(bottom: 6, top: 6),
-                            child: GoalTileComponent(),
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 6, top: 6),
+                            child: GoalTileComponent(habit: habits[index],),
                           );
                         }),
                   )
