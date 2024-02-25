@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
+import 'package:habit_manager/core/data/models/habit_model.dart';
+import 'package:habit_manager/core/data/services/fetch_habits_service.dart';
 import 'package:habit_manager/core/ui/components/habit_tile_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
@@ -13,6 +15,33 @@ class YourHabitsScreen extends StatefulWidget {
 }
 
 class _YourHabitsScreenState extends State<YourHabitsScreen> {
+  bool isLoading = true;
+  bool requestHasError = false;
+  List<HabitModel> habits = [];
+
+  Future<void> handleFetchHabits() async {
+    var response = await fetchHabitsService();
+
+    if (!response.succeeded) {
+      requestHasError = true;
+      isLoading = false;
+      print('Error catched = ${response.error}');
+      setState(() {});
+      return;
+    }
+
+    habits = response.data!;
+    isLoading = false;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // Future(handleFetchHabits);
+    Future( () async => await handleFetchHabits());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -49,14 +78,47 @@ class _YourHabitsScreenState extends State<YourHabitsScreen> {
                     ],
                   ),
                   const Gap(30),
-                  Expanded(
+                  isLoading ? 
+                  const Center(
+                    child: Text(
+                      'Carregando habitos.',
+                      style: TextStyle(
+                          color: AppColors.blue,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 28,
+                      ),
+                    ),
+                  )
+                  : requestHasError
+                  ? const Center(
+                    child: Text(
+                      'Houve erro para carregar os dados',
+                      style: TextStyle(
+                          color: AppColors.blue,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 28,
+                      ),
+                    ),
+                  )
+                  : habits.isEmpty 
+                  ? const Center(
+                    child: Text(
+                      'Você ainda não possui nenhum habito cadastrado',
+                      style: TextStyle(
+                          color: AppColors.blue,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 28,
+                      ),
+                    ),
+                  )
+                  : Expanded(
                     child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: 10,
+                        itemCount: habits.length,
                         itemBuilder: (context, index) {
-                          return const Padding(
-                            padding: EdgeInsets.only(bottom: 6, top: 6),
-                            child: HabitTileComponent(),
+                          return  Padding(
+                            padding: const EdgeInsets.only(bottom: 6, top: 6),
+                            child: HabitTileComponent(habit: habits[index],),
                           );
                         }),
                   )
