@@ -10,7 +10,7 @@ Future<List<HabitModel>> fetchHabitsHttp() async {
 
   String? accessToken = GlobalVariables().accessToken;
   
-  if (accessToken != null) {
+  if (accessToken == null) {
     throw Exception('Error on fetchHabitsHttp :: token key is empty.');
   }
 
@@ -19,7 +19,7 @@ Future<List<HabitModel>> fetchHabitsHttp() async {
   var response = await http.get(
     url,
     headers: {
-      'authentication': 'Bearer $accessToken',
+      'Authorization': 'Bearer $accessToken',
     }
   );
 
