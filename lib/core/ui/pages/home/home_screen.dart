@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:habit_manager/core/data/models/habit_model.dart';
-import 'package:habit_manager/core/data/services/fetch_habits_service.dart';
+import 'package:habit_manager/core/data/services/get_top_habits_service.dart';
 import 'package:habit_manager/core/ui/components/bottom_navigation_bar_icon.dart';
 import 'package:habit_manager/core/ui/components/display_current_date_component.dart';
 import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
@@ -22,11 +22,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   bool isLoading = true;
-  late List<HabitModel> habits;
+  List<HabitModel> habits = [];
   bool requestHasError = false;
 
   Future<void> handleFetchHabits() async {
-    var response = await fetchHabitsService();
+    var response = await getTopHabitsService();
 
     if (!response.succeeded) {
       requestHasError = true;
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    Future(handleFetchHabits);
+    Future( () async => await handleFetchHabits());
     super.initState();
   }
 
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ListView.builder(
                           shrinkWrap: true,
                           primary: false,
-                          itemCount: 3,
+                          itemCount: habits.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 8),
