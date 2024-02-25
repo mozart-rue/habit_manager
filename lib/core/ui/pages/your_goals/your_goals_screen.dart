@@ -3,6 +3,7 @@ import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:habit_manager/core/data/models/habit_model.dart';
 import 'package:habit_manager/core/data/services/fetch_habits_service.dart';
+import 'package:habit_manager/core/ui/components/animated_loading.dart';
 import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
@@ -77,9 +78,7 @@ class _YourGoalsScreenState extends State<YourGoalsScreen> {
                   ),
                   const Gap(30),
                   isLoading ? 
-                  const Center(
-                    child: Text('Carregando habitos.'),
-                  )
+                  const AnimatedLoading()
                   : requestHasError
                   ? const Center(
                     child: Text('Houve erro para carregar os dados'),
