@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:habit_manager/core/data/models/habit_model.dart';
 import 'package:habit_manager/core/data/services/fetch_habits_service.dart';
 import 'package:habit_manager/core/ui/components/animated_loading.dart';
+import 'package:habit_manager/core/ui/components/empty_space.dart';
 import 'package:habit_manager/core/ui/components/goal_tile_component.dart';
 import 'package:habit_manager/core/ui/components/something_went_wrong.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
@@ -26,6 +27,7 @@ class _YourGoalsScreenState extends State<YourGoalsScreen> {
 
     if (!response.succeeded) {
       requestHasError = true;
+      isLoading = false;
       setState(() {});
       return;
     }
@@ -83,9 +85,7 @@ class _YourGoalsScreenState extends State<YourGoalsScreen> {
                   : requestHasError
                   ? const SomethingWentWrong()
                   : habits.isEmpty 
-                  ? const Center(
-                    child: Text('Você ainda não possui nenhum habito cadastrado'),
-                  )
+                  ? const EmptySpace() 
                   : Expanded(
                     child: ListView.builder(
                         shrinkWrap: true,
