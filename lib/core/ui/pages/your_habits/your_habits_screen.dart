@@ -5,6 +5,7 @@ import 'package:habit_manager/core/data/models/habit_model.dart';
 import 'package:habit_manager/core/data/services/fetch_habits_service.dart';
 import 'package:habit_manager/core/ui/components/animated_loading.dart';
 import 'package:habit_manager/core/ui/components/habit_tile_component.dart';
+import 'package:habit_manager/core/ui/components/something_went_wrong.dart';
 import 'package:habit_manager/core/ui/consts/app_colors.dart';
 import 'package:habit_manager/core/ui/pages/background/background_screen.dart';
 
@@ -82,16 +83,7 @@ class _YourHabitsScreenState extends State<YourHabitsScreen> {
                   isLoading ? 
                   const AnimatedLoading()
                   : requestHasError
-                  ? const Center(
-                    child: Text(
-                      'Houve erro para carregar os dados',
-                      style: TextStyle(
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 28,
-                      ),
-                    ),
-                  )
+                  ? const SomethingWentWrong() 
                   : habits.isEmpty 
                   ? const Center(
                     child: Text(
